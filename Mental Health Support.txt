@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MindWell - Mental Health Support</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-gray-100">
+    <!-- Navigation -->
+    <nav class="bg-blue-600 text-white p-4 flex justify-between">
+        <div class="logo font-bold text-xl">MindWell</div>
+        <div>
+            <a href="#dashboard" class="mx-2">Dashboard</a>
+            <a href="#mood-tracking" class="mx-2">Mood Tracking</a>
+            <a href="#wellness" class="mx-2">Wellness</a>
+            <a href="#counseling" class="mx-2">Counseling</a>
+        </div>
+    </nav>
+
+    <!-- Mood Tracking Page -->
+    <div id="mood-tracking" class="container mx-auto p-6">
+        <h2 class="text-3xl font-bold mb-6">Comprehensive Mood Tracking</h2>
+        
+        <div class="grid md:grid-cols-2 gap-6">
+            <!-- Mood Check-in Section -->
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <h3 class="text-2xl font-semibold mb-4">Daily Mood Check-in</h3>
+                <div class="grid grid-cols-4 gap-4">
+                    <button onclick="setMood('happy')" class="mood-btn bg-green-100 p-4 rounded">😊 Happy</button>
+                    <button onclick="setMood('neutral')" class="mood-btn bg-gray-100 p-4 rounded">😐 Neutral</button>
+                    <button onclick="setMood('sad')" class="mood-btn bg-blue-100 p-4 rounded">😢 Sad</button>
+                    <button onclick="setMood('anxious')" class="mood-btn bg-red-100 p-4 rounded">😰 Anxious</button>
+                </div>
+            </div>
+
+            <!-- Mood Analytics -->
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <h3 class="text-2xl font-semibold mb-4">Mood Analytics</h3>
+                <canvas id="mood-chart"></canvas>
+            </div>
+        </div>
+
+        <!-- Mood Tracking Features -->
+        <div class="mt-6 grid md:grid-cols-3 gap-6">
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <h4 class="font-bold mb-4">Mood Journal</h4>
+                <textarea class="w-full h-32 border rounded p-2" placeholder="Write about your feelings today..."></textarea>
+                <button class="mt-2 bg-blue-500 text-white p-2 rounded">Save Journal Entry</button>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <h4 class="font-bold mb-4">Mood Triggers</h4>
+                <select class="w-full border rounded p-2 mb-2">
+                    <option>Select Mood Trigger</option>
+                    <option>Work Stress</option>
+                    <option>Personal Relationships</option>
+                    <option>Health Concerns</option>
+                </select>
+                <button class="bg-green-500 text-white w-full p-2 rounded">Log Trigger</button>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <h4 class="font-bold mb-4">Mood Improvement Suggestions</h4>
+                <ul id="mood-suggestions" class="list-disc pl-5">
+                    <li>Take a 10-minute walk</li>
+                    <li>Practice deep breathing</li>
+                    <li>Listen to calming music</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Wellness Page -->
+    <div id="wellness" class="container mx-auto p-6">
+        <h2 class="text-3xl font-bold mb-6">Wellness Resources</h2>
+        
+        <div class="grid md:grid-cols-3 gap-6">
+            <!-- Music Therapy -->
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <h3 class="text-2xl font-semibold mb-4">🎵 Music Therapy</h3>
+                <div class="mb-4">
+                    <h4 class="font-bold">Relaxation Playlist</h4>
+                    <audio controls class="w-full mt-2">
+                        <source src="" type="audio/mpeg">
+                        Your browser does not support audio.
+                    </audio>
+                </div>
+                <div class="grid grid-cols-2 gap-2">
+                    <button class="bg-blue-500 text-white p-2 rounded">Calm Sounds</button>
+                    <button class="bg-green-500 text-white p-2 rounded">Nature Sounds</button>
+                </div>
+            </div>
+
+            <!-- Yoga & Meditation -->
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <h3 class="text-2xl font-semibold mb-4">🧘 Yoga & Meditation</h3>
+                <video controls class="w-full mb-4">
+                    <source src="" type="video/mp4">
+                    Your browser does not support video.
+                </video>
+                <div class="grid grid-cols-2 gap-2">
+                    <button class="bg-green-500 text-white p-2 rounded">10 Min Calm</button>
+                    <button class="bg-blue-500 text-white p-2 rounded">Breathing</button>
+                </div>
+            </div>
+
+            <!-- Motivational Stories -->
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <h3 class="text-2xl font-semibold mb-4">📖 Motivational Stories</h3>
+                <p id="story-content" class="mb-4">
+                    Daily inspiration for mental wellness and personal growth.
+                </p>
+                <button onclick="generateStory()" class="bg-purple-500 text-white p-2 rounded">
+                    New Story
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Counseling Page -->
+    <div id="counseling" class="container mx-auto p-6">
+        <h2 class="text-3xl font-bold mb-6">Mental Health Counselors</h2>
+        
+        <div class="grid md:grid-cols-3 gap-6">
+            <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                <img src="/api/placeholder/200/200" class="rounded-full mx-auto mb-4" alt="Counselor">
+                <h3 class="font-bold text-xl">Dr. Emily Johnson</h3>
+                <p class="text-gray-600">Experience: 12 Years</p>
+                <p class="mb-4">Specialization: Anxiety & Depression</p>
+                <div class="flex justify-center space-x-4">
+                    <button class="bg-green-500 text-white p-2 rounded">Video Call</button>
+                    <button class="bg-blue-500 text-white p-2 rounded">Live Chat</button>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                <img src="/api/placeholder/200/200" class="rounded-full mx-auto mb-4" alt="Counselor">
+                <h3 class="font-bold text-xl">Dr. Michael Lee</h3>
+                <p class="text-gray-600">Experience: 8 Years</p>
+                <p class="mb-4">Specialization: Stress Management</p>
+                <div class="flex justify-center space-x-4">
+                    <button class="bg-green-500 text-white p-2 rounded">Video Call</button>
+                    <button class="bg-blue-500 text-white p-2 rounded">Live Chat</button>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                <img src="/api/placeholder/200/200" class="rounded-full mx-auto mb-4" alt="Counselor">
+                <h3 class="font-bold text-xl">Dr. Sarah Rodriguez</h3>
+                <p class="text-gray-600">Experience: 15 Years</p>
+                <p class="mb-4">Specialization: Trauma Recovery</p>
+                <div class="flex justify-center space-x-4">
+                    <button class="bg-green-500 text-white p-2 rounded">Video Call</button>
+                    <button class="bg-blue-500 text-white p-2 rounded">Live Chat</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mood Tracking Functions
+        function setMood(mood) {
+            console.log(`Mood set: ${mood}`);
+        }
+
+        // Story Generation
+        function generateStory() {
+            const stories = [
+                "Overcoming personal challenges through resilience.",
+                "Finding inner strength during difficult times.",
+                "Transforming life through positive mindset."
+            ];
+            document.getElementById('story-content').innerText = 
+                stories[Math.floor(Math.random() * stories.length)];
+        }
+
+        // Mood Chart
+        const ctx = document.getElementById('mood-chart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                datasets: [{
+                    label: 'Weekly Mood',
+                    data: [3, 2, 4, 3, 5, 2, 4],
+                    borderColor: 'blue',
+                    tension: 0.1
+                }]
+            }
+        });
+    </script>
+</body>
+</html>
